@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="author" content="Rokin">
+<link rel="author" href="http://www.worldisacube.net">
+<link rel="icon" type="image/x-icon" href="favicon.png">
+<link rel="stylesheet" type="text/css" href="Topology.css">
+<script src="Topology.js"></script>
+<title>Topology</title>
+
+<body id="body" onload="init(2)">
+  <h1>Topology</h1>
+  <section id="overlay">
+    <span id="loading">LOADING</span>
+    <section>
+      <textarea id="selectable"></textarea>
+      <button id="load" onclick="loadMap()">load</button>
+      <button id="close" onclick="closeOverlay()">close</button>
+    </section>
+  </section>
+  
+  <section id="menu">
+    <section id="mainButtons">
+      <button class="sets" onclick="changeSet(1)">set one</button>
+      <button class="sets" onclick="changeSet(2)">set two</button>
+      <button class="sets" onclick="changeSet(3)">set three</button> | 
+      <button id="export" onclick="importMap()">load</button>
+      <button id="import" onclick="exportMap()">save</button>
+    </section>
+    <ul id="set1" class="elements">
+      <li>&nbsp;</li><li>▁</li><li>▂</li><li>▀</li><li>▄</li><li>▅</li>
+      <li>▆</li><li>▇</li><li>█</li><li>▉</li><li>▊</li><li>▋</li>
+      <li>▌</li><li>▍</li><li>▎</li><li>▐</li><li>▖</li><li>▗</li>
+      <li>▘</li><li>▝</li><li>▚</li><li>▞</li><li>▙</li><li>▛</li>
+      <li>▜</li><li>▟</li><li>▓</li><li>▒</li><li>░</li><li>╳</li>
+      <li>•</li><li>◦</li><li>‐</li><li>‒</li><li>‖</li><li>|</li>
+      <li>■</li><li>□</li><li>▢</li><li>▣</li><li>▤</li><li>▥</li>
+      <li>▦</li><li>▧</li><li>▨</li><li>▩</li><li>▪</li><li>▫</li>
+      <li>▬</li><li>▭</li><li>▮</li><li>▯</li><li>◻</li><li>◼</li>
+      <li>◽</li><li>◾</li><li>◢</li><li>◣</li><li>◤</li><li>◥</li>
+      <li>▲</li><li>▶</li><li>▼</li><li>◀</li>
+    </ul>
+
+    <ul id="set2" class="elements">
+      <li>═</li><li>║</li><li>╔</li><li>╗</li><li>╚</li><li>╝</li>
+      <li>╠</li><li>╣</li><li>╦</li><li>╩</li><li>╬</li><li>╒</li>
+      <li>╓</li><li>╕</li><li>╛</li><li>╖</li><li>╞</li><li>╟</li>
+      <li>╤</li><li>╥</li><li>╧</li><li>╨</li><li>╪</li><li>╡</li>
+      <li>╘</li><li>╙</li><li>╢</li><li>╜</li><li>╫</li><li>▕</li>
+      <li>╎</li><li>╏</li><li>╵</li><li>╷</li><li>╹</li><li>╻</li>
+      <li>┆</li><li>┇</li><li>┊</li><li>┋</li><li>│</li><li>┃</li>
+      <li>╽</li><li>╿</li><li>▔</li><li>╌</li><li>╍</li><li>╴</li>
+      <li>╶</li><li>╸</li><li>╺</li><li>┄</li><li>┅</li><li>┈</li>
+      <li>┉</li><li>╼</li><li>╾</li><li>━</li><li>╭</li><li>╮</li>
+      <li>╯</li><li>╰</li><li>╱</li><li>╲</li>
+    </ul>
+
+    <ul id="set3" class="elements">
+      <li>┌</li><li>┍</li><li>┎</li><li>┏</li><li>┐</li><li>┑</li>
+      <li>┒</li><li>┓</li><li>└</li><li>┕</li><li>┖</li><li>┗</li>
+      <li>┘</li><li>┙</li><li>┚</li><li>┛</li><li>├</li><li>┝</li>
+      <li>┞</li><li>┟</li><li>┠</li><li>┡</li><li>┢</li><li>┣</li>
+      <li>┤</li><li>┥</li><li>┦</li><li>┧</li><li>┨</li><li>┩</li>
+      <li>┪</li><li>┫</li><li>┬</li><li>┭</li><li>┮</li><li>┯</li>
+      <li>┰</li><li>┱</li><li>┲</li><li>┳</li><li>┴</li><li>┵</li>
+      <li>┶</li><li>┷</li><li>┸</li><li>┹</li><li>┺</li><li>┻</li>
+      <li>┼</li><li>┽</li><li>┾</li><li>┿</li><li>╀</li><li>╁</li>
+      <li>╂</li><li>╃</li><li>╄</li><li>╅</li><li>╆</li><li>╇</li>
+      <li>╈</li><li>╉</li><li>╊</li><li>╋</li>
+    </ul>
+
+    <section id="settings">
+      new: 
+      <button onclick="newMap(1)">small</button>
+      <button onclick="newMap(2)">medium</button>
+      <button onclick="newMap(3)">large</button><br>
+      text color: <input id="settingFontColor" oninput="fontColor()"
+        type="range" min="0" max="15" value="15"><br>
+      background: <input id="settingBgColor" oninput="bagColor()"
+        type="range" min="0" max="15" value="0"><br>
+      font size: <input id="settingFontSize" oninput="fontSize()"
+        type="range" min="5" max="50" value="30"><br>
+      padding: <input id="settingPadding" oninput="padding()"
+        type="range" min="0" max="5" value="4"><br>
+      line height: <input id="settingLineHeight" oninput="lineHeight()"
+        type="range" min="15" max="30" value="15"><br>
+      grid: <input id="settingGrid" onchange="grid()" type="checkbox" checked>
+    </section>
+  </section>
+
+  <section id="tools">
+    <span onclick="selectTool(this)">‒</span>
+    <span onclick="selectTool(this)">═</span>
+    <span onclick="selectTool(this)">|</span>
+    <span onclick="selectTool(this)">‖</span>
+    <span onclick="selectTool(this)">┼</span>
+    <span onclick="selectTool(this)">╬</span>
+    <span onclick="selectTool(this)">╳</span>
+    <span onclick="selectTool(this)">◦</span>
+    <span onclick="selectTool(this)">•</span>
+    <span onclick="selectTool(this)">□</span>
+    <span onclick="selectTool(this)">■</span>
+    <span onclick="selectTool(this)">░</span>
+    <span onclick="selectTool(this)">▒</span>
+    <span onclick="selectTool(this)">▓</span>
+    <span onclick="selectTool(this)">█</span>
+    <span onclick="selectTool(this)">&nbsp;</span>
+  </section>
+  <section id="map"></section>
+</body></html>
