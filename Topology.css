@@ -1,4 +1,7 @@
-html { -webkit-user-select: none; }
+html {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none; }
 body {
   min-width: 900px;
   margin: 0 auto;
